@@ -27,52 +27,25 @@ public class Customer {
          double thisAmount = 0;
          Rental each = (Rental) rentals.nextElement();
 
-         // chamada ao método (continua igual)
-         thisAmount = amountFor(each);
+         // chamada atualizada
+         thisAmount = each.getCharge();
 
-         // add frequent renter points
+         // frequent renter points
          frequentRenterPoints++;
          if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
              each.getDaysRented() > 1)
             frequentRenterPoints++;
 
-         // show figures for this rental
+         // show figures
          result += "\t" + each.getMovie().getTitle() + "\t" +
               String.valueOf(thisAmount) + "\n";
-         totalAmount += thisAmount;
 
+         totalAmount += thisAmount;
       }
-      // add footer lines
+
       result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
       result += "You earned " + String.valueOf(frequentRenterPoints) +
               " frequent renter points";
       return result;
-   }
-
-   // ===============================
-   // MÉTODO amountFor RENOMEADO
-   // ===============================
-   private double amountFor(Rental aRental) {
-      double thisAmount = 0;
-
-      switch (aRental.getMovie().getPriceCode()) {
-         case Movie.REGULAR:
-            thisAmount += 2;
-            if (aRental.getDaysRented() > 2)
-               thisAmount += (aRental.getDaysRented() - 2) * 1.5;
-            break;
-
-         case Movie.NEW_RELEASE:
-            thisAmount += aRental.getDaysRented() * 3;
-            break;
-
-         case Movie.CHILDRENS:
-            thisAmount += 1.5;
-            if (aRental.getDaysRented() > 3)
-               thisAmount += (aRental.getDaysRented() - 3) * 1.5;
-            break;
-      }
-
-      return thisAmount;
    }
 }
