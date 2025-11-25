@@ -5,18 +5,18 @@ public class Customer {
    private String _name;
    private Vector _rentals = new Vector();
 
-   public Customer (String name){
+   public Customer(String name) {
       _name = name;
    }
 
    public void addRental(Rental arg) {
       _rentals.addElement(arg);
    }
-   
-   public String getName (){
+
+   public String getName() {
       return _name;
    }
-  
+
    public String statement() {
       double totalAmount = 0;
       int frequentRenterPoints = 0;
@@ -24,28 +24,25 @@ public class Customer {
       String result = "Rental Record for " + getName() + "\n";
 
       while (rentals.hasMoreElements()) {
-         double thisAmount = 0;
          Rental each = (Rental) rentals.nextElement();
 
-         // chamada atualizada
-         thisAmount = each.getCharge();
-
-         // frequent renter points
+         // add frequent renter points
          frequentRenterPoints++;
          if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
              each.getDaysRented() > 1)
             frequentRenterPoints++;
 
-         // show figures
+         // show figures for this rental (substituído)
          result += "\t" + each.getMovie().getTitle() + "\t" +
-              String.valueOf(thisAmount) + "\n";
+                   String.valueOf(each.getCharge()) + "\n";
 
-         totalAmount += thisAmount;
+         // também substituído
+         totalAmount += each.getCharge();
       }
 
       result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
       result += "You earned " + String.valueOf(frequentRenterPoints) +
-              " frequent renter points";
+                " frequent renter points";
       return result;
    }
 }
