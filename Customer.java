@@ -23,27 +23,50 @@ public class Customer {
 
         for (Rental each : rentals) {
 
-            // mostra valores deste aluguel
+            // show figures for this rental
             result.append("\t")
-                  .append(each.getMovie().getTitle())
-                  .append("\t")
-                  .append(each.getCharge())
-                  .append("\n");
+                    .append(each.getMovie().getTitle())
+                    .append("\t")
+                    .append(each.getCharge())
+                    .append("\n");
         }
 
-        // rodapé
+        // footer
         result.append("Amount owed is ")
-              .append(getTotalCharge())
-              .append("\n");
+                .append(getTotalCharge())
+                .append("\n");
 
         result.append("You earned ")
-              .append(getTotalFrequentRenterPoints())
-              .append(" frequent renter points");
+                .append(getTotalFrequentRenterPoints())
+                .append(" frequent renter points");
 
         return result.toString();
     }
 
-    /** Soma o total cobrado do cliente */
+    /** ------ NOVA FEATURE: HTML STATEMENT ------ */
+    public String htmlStatement() {
+        StringBuilder result = new StringBuilder(
+                "<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n");
+
+        for (Rental each : rentals) {
+            result.append(each.getMovie().getTitle())
+                    .append(": ")
+                    .append(each.getCharge())
+                    .append("<BR>\n");
+        }
+
+        result.append("<P>You owe <EM>")
+                .append(getTotalCharge())
+                .append("</EM><P>\n");
+
+        result.append("On this rental you earned <EM>")
+                .append(getTotalFrequentRenterPoints())
+                .append("</EM> frequent renter points<P>");
+
+        return result.toString();
+    }
+
+    /** Soma o total cobrado */
     private double getTotalCharge() {
         double result = 0;
         for (Rental each : rentals) {
@@ -52,7 +75,7 @@ public class Customer {
         return result;
     }
 
-    /** Soma todos os pontos ganhos */
+    /** Soma todos os pontos do cliente */
     private int getTotalFrequentRenterPoints() {
         int result = 0;
         for (Rental each : rentals) {
