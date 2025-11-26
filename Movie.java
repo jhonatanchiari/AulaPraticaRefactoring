@@ -24,14 +24,13 @@ public class Movie {
         return title;
     }
 
-    // ================================================
-    // NOVO MÉTODO EXTRAÍDO (getCharge em Movie)
-    // ================================================
+    // =====================================================
+    // getCharge EXTRAÍDO (Passo 1)
+    // =====================================================
     public double getCharge(int daysRented) {
         double thisAmount = 0;
 
         switch (priceCode) {
-
             case REGULAR:
                 thisAmount += 2;
                 if (daysRented > 2)
@@ -50,5 +49,21 @@ public class Movie {
         }
 
         return thisAmount;
+    }
+
+    // =====================================================
+    // NOVO MÉTODO EXTRAÍDO (Passo 2)
+    // =====================================================
+    public int getFrequentRenterPoints(int daysRented) {
+
+        // Regra original:
+        // Se NEW_RELEASE e alugado > 1 dia → 2 pontos
+        // Senão → 1 ponto
+
+        if (priceCode == NEW_RELEASE && daysRented > 1) {
+            return 2;
+        }
+
+        return 1;
     }
 }

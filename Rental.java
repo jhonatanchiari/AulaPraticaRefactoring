@@ -16,18 +16,14 @@ public class Rental {
         return movie;
     }
 
-    // ================================================
-    // Método agora apenas delega ao Movie
-    // ================================================
     public double getCharge() {
         return movie.getCharge(daysRented);
     }
 
+    // =====================================================
+    // Método agora delega para Movie (Passo 2)
+    // =====================================================
     public int getFrequentRenterPoints() {
-        if (movie.getPriceCode() == Movie.NEW_RELEASE &&
-                daysRented > 1) {
-            return 2;
-        }
-        return 1;
+        return movie.getFrequentRenterPoints(daysRented);
     }
 }
