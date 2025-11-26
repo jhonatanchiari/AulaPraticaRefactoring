@@ -5,32 +5,46 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String title;
-    private int priceCode;
+    private Price price;
 
     public Movie(String title, int priceCode) {
         this.title = title;
-        this.priceCode = priceCode;
+        setPriceCode(priceCode);
     }
 
     public int getPriceCode() {
-        return priceCode;
+        return price.getPriceCode();
     }
 
     public void setPriceCode(int arg) {
-        priceCode = arg;
+        switch (arg) {
+            case REGULAR:
+                price = new RegularPrice();
+                break;
+            case CHILDRENS:
+                price = new ChildrensPrice();
+                break;
+            case NEW_RELEASE:
+                price = new NewReleasePrice();
+                break;
+            default:
+                throw new IllegalArgumentException("Incorrect Price Code");
+        }
     }
 
     public String getTitle() {
         return title;
     }
 
-    // =====================================================
-    // getCharge EXTRAÍDO (Passo 1)
-    // =====================================================
+    // ======================================================
+    // getCharge agora delega para Price? Ainda não!
+    // (Será modificado no próximo passo)
+    // ======================================================
     public double getCharge(int daysRented) {
         double thisAmount = 0;
 
-        switch (priceCode) {
+        switch (getPriceCode()) {
+
             case REGULAR:
                 thisAmount += 2;
                 if (daysRented > 2)
@@ -51,19 +65,10 @@ public class Movie {
         return thisAmount;
     }
 
-    // =====================================================
-    // NOVO MÉTODO EXTRAÍDO (Passo 2)
-    // =====================================================
     public int getFrequentRenterPoints(int daysRented) {
-
-        // Regra original:
-        // Se NEW_RELEASE e alugado > 1 dia → 2 pontos
-        // Senão → 1 ponto
-
-        if (priceCode == NEW_RELEASE && daysRented > 1) {
+        if (getPriceCode() == NEW_RELEASE && daysRented > 1) {
             return 2;
         }
-
         return 1;
     }
 }
