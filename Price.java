@@ -1,15 +1,9 @@
 public abstract class Price {
-
     public abstract int getPriceCode();
-
-    // Agora é totalmente abstrato
     public abstract double getCharge(int daysRented);
 
-    // ✔ Este método agora contém a lógica extraída de Movie
+    //Método genérico para todos os preços (exceto NEW_RELEASE)
     public int getFrequentRenterPoints(int daysRented) {
-        if (getPriceCode() == Movie.NEW_RELEASE && daysRented > 1) {
-            return 2; // bônus
-        }
-        return 1; // padrão
+        return 1;
     }
 }

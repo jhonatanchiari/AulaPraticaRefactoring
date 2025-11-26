@@ -12,6 +12,7 @@ public class NewReleasePrice extends Price {
 
     @Override
     public int getFrequentRenterPoints(int daysRented) {
+        // Caso especial: mais de 1 dia → ganha 2 pontos
         return (daysRented > 1) ? 2 : 1;
     }
 }
