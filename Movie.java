@@ -1,4 +1,5 @@
 public class Movie {
+
     public static final int CHILDRENS = 2;
     public static final int REGULAR = 0;
     public static final int NEW_RELEASE = 1;
@@ -24,8 +25,10 @@ public class Movie {
                 _price = new NewReleasePrice();
                 break;
             case CHILDRENS:
-                _price = new ChildrenPrice();
+                _price = new ChildrenPrice(); // ajuste aqui para o nome correto
                 break;
+            default:
+                throw new IllegalArgumentException("Invalid price code");
         }
     }
 
@@ -33,12 +36,10 @@ public class Movie {
         return _title;
     }
 
-    // 👉 Depois do refactoring:
     public double getCharge(int daysRented) {
         return _price.getCharge(daysRented);
     }
 
-    // Já feito no commit anterior:
     public int getFrequentRenterPoints(int daysRented) {
         return _price.getFrequentRenterPoints(daysRented);
     }
