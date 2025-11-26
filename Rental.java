@@ -1,29 +1,26 @@
 public class Rental {
 
-    private Movie movie;
-    private int daysRented;
+    private Movie _movie;
+    private int _daysRented;
 
     public Rental(Movie movie, int daysRented) {
-        this.movie = movie;
-        this.daysRented = daysRented;
+        _movie = movie;
+        _daysRented = daysRented;
     }
 
     public int getDaysRented() {
-        return daysRented;
+        return _daysRented;
     }
 
     public Movie getMovie() {
-        return movie;
+        return _movie;
     }
 
     public double getCharge() {
-        return movie.getCharge(daysRented);
+        return _movie.getCharge(_daysRented);
     }
 
-    // =====================================================
-    // Método agora delega para Movie (Passo 2)
-    // =====================================================
     public int getFrequentRenterPoints() {
-        return movie.getFrequentRenterPoints(daysRented);
+        return _movie.getFrequentRenterPoints(_daysRented);
     }
 }

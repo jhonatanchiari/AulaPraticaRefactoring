@@ -25,10 +25,8 @@ public class Movie {
                 _price = new NewReleasePrice();
                 break;
             case CHILDRENS:
-                _price = new ChildrenPrice(); // ajuste aqui para o nome correto
+                _price = new ChildrenPrice();
                 break;
-            default:
-                throw new IllegalArgumentException("Invalid price code");
         }
     }
 
