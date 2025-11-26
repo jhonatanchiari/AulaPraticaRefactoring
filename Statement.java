@@ -2,7 +2,7 @@ import java.util.Enumeration;
 
 public abstract class Statement {
 
-    // TEMPLATE METHOD
+    // TEMPLATE METHOD → agora centralizado aqui
     public String value(Customer aCustomer) {
 
         String result = headerString(aCustomer);
@@ -18,7 +18,7 @@ public abstract class Statement {
         return result;
     }
 
-    // MÉTODOS ABSTRATOS — as subclasses implementarão
+    // HOOK METHODS — subclasses implementam
     protected abstract String headerString(Customer aCustomer);
 
     protected abstract String eachRentalString(Rental each);
